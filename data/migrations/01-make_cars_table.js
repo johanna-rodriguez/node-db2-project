@@ -1,6 +1,4 @@
-const { Knex } = require("knex");
-
-exports.up = function (knex) {
+exports.up = function (Knex) {
   return Knex.schema.createTable('cars', tbl => {
     tbl.increments()
 
@@ -8,9 +6,9 @@ exports.up = function (knex) {
 
     tbl.string('make', 128).notNullable()
 
-    tbl.string('model', 128).notNullable()
+    tbl.string('model', 256).notNullable()
 
-    tbl.string('mileage').unsigned().notNullable()
+    tbl.integer('mileage').unsigned().notNullable()
 
     tbl.string('title', 128)
 
@@ -18,6 +16,6 @@ exports.up = function (knex) {
   })
 };
 
-exports.down = function (knex) {
-  // DO YOUR MAGIC
+exports.down = function(Knex) {
+  return Knex.schema.dropTableIfExists('cars')
 };
